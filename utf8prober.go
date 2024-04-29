@@ -1,6 +1,8 @@
 package chardet
 
-import "math"
+import (
+	"math"
+)
 
 const (
 	ONE_CHAR_PROB = 0.5
@@ -16,7 +18,7 @@ func NewUTF8Prober() *UTF8Prober {
 	var u UTF8Prober
 	u.init(NONE)
 	u.numMbChars = 0
-	u.codingSm = NewCodingStateMachine(UTF8_SM_MODEL)
+	u.codingSm = NewCodingStateMachine(UTF8_SM_MODEL_NEW)
 	u.reset()
 	return &u
 }
@@ -52,7 +54,6 @@ func (u *UTF8Prober) feed(data []byte) ProbingState {
 			}
 		}
 	}
-
 	if u.state_ == DETECTING {
 		if u.getConfidence() > SHORTCUT_THRESHOLD {
 			u.state_ = FOUND_IT

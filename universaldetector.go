@@ -111,7 +111,7 @@ func (u *UniversalDetector) Feed(data []byte) {
 		if bytes.HasPrefix(data, BOM_UTF8) {
 			u.result = ResultDict{
 				confidence: 1.0,
-				encoding:   "UTF-8-SIG",
+				encoding:   "UTF-8",
 				language:   "",
 			}
 		} else if bytes.HasPrefix(data, BOM_UTF32_LE) || bytes.HasPrefix(data, BOM_UTF32_BE) {
@@ -146,7 +146,7 @@ func (u *UniversalDetector) Feed(data []byte) {
 		}
 	}
 
-	//判断是否是非acii
+	//判断是否是非ascii
 	if u.inputState == PURE_ASCII {
 		if HIGH_BYTE_DETECTOR.Match(data) {
 			u.inputState = HIGH_BYTE
@@ -229,7 +229,7 @@ func (u *UniversalDetector) Close() ResultDict {
 
 	} else if u.inputState == PURE_ASCII {
 		u.result = ResultDict{
-			encoding:   "ascii",
+			encoding:   "utf-8",
 			confidence: 1.0,
 			language:   "",
 		}

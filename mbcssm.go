@@ -631,3 +631,63 @@ var EUCTW_SM_MODEL = CodingStateMachineDict{
 	charLenTable: EUCTW_CHAR_LEN_TABLE,
 	name:         "x-euc-tw",
 }
+
+var UTF8_CLS_NEW = []int{
+	1, 1, 1, 1, 1, 1, 1, 1, // 00 - 07  //allow 0x00 as a legal value
+	1, 1, 1, 1, 1, 1, 1, 1, // 08 - 0f
+	1, 1, 1, 1, 1, 1, 1, 1, // 10 - 17
+	1, 1, 1, 1, 1, 1, 1, 1, // 18 - 1f
+	1, 1, 1, 1, 1, 1, 1, 1, // 20 - 27
+	1, 1, 1, 1, 1, 1, 1, 1, // 28 - 2f
+	1, 1, 1, 1, 1, 1, 1, 1, // 30 - 37
+	1, 1, 1, 1, 1, 1, 1, 1, // 38 - 3f
+	1, 1, 1, 1, 1, 1, 1, 1, // 40 - 47
+	1, 1, 1, 1, 1, 1, 1, 1, // 48 - 4f
+	1, 1, 1, 1, 1, 1, 1, 1, // 50 - 57
+	1, 1, 1, 1, 1, 1, 1, 1, // 58 - 5f
+	1, 1, 1, 1, 1, 1, 1, 1, // 60 - 67
+	1, 1, 1, 1, 1, 1, 1, 1, // 68 - 6f
+	1, 1, 1, 1, 1, 1, 1, 1, // 70 - 77
+	1, 1, 1, 1, 1, 1, 1, 1, // 78 - 7f
+	2, 2, 2, 2, 2, 2, 2, 2, // 80 - 87
+	2, 2, 2, 2, 2, 2, 2, 2, // 88 - 8f
+	3, 3, 3, 3, 3, 3, 3, 3, // 90 - 97
+	3, 3, 3, 3, 3, 3, 3, 3, // 98 - 9f
+	4, 4, 4, 4, 4, 4, 4, 4, // a0 - a7
+	4, 4, 4, 4, 4, 4, 4, 4, // a8 - af
+	4, 4, 4, 4, 4, 4, 4, 4, // b0 - b7
+	4, 4, 4, 4, 4, 4, 4, 4, // b8 - bf
+	0, 0, 5, 5, 5, 5, 5, 5, // c0 - c7
+	5, 5, 5, 5, 5, 5, 5, 5, // c8 - cf
+	5, 5, 5, 5, 5, 5, 5, 5, // d0 - d7
+	5, 5, 5, 5, 5, 5, 5, 5, // d8 - df
+	6, 7, 7, 7, 7, 7, 7, 7, // e0 - e7
+	7, 7, 7, 7, 7, 8, 7, 7, // e8 - ef
+	9, 10, 10, 10, 11, 0, 0, 0, // f0 - f7
+	0, 0, 0, 0, 0, 0, 0, 0, // f8 - ff
+}
+
+var UTF8_ST_NEW = []int{
+	ERROR, START, ERROR, ERROR, ERROR, 3, 5, 4, 6, 8, 7, 9, //start
+	ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR,
+	ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME, ITS_ME,
+	ERROR, ERROR, START, START, START, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, //a
+	ERROR, ERROR, 3, 3, 3, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, //b
+	ERROR, ERROR, ERROR, ERROR, 3, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, //c
+	ERROR, ERROR, 3, 3, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, //d
+	ERROR, ERROR, 4, 4, 4, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, //e
+	ERROR, ERROR, ERROR, 4, 4, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, //f
+	ERROR, ERROR, 4, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, //g
+}
+
+// fmt: on
+
+var UTF8_CHAR_LEN_TABLE_NEW = []int{0, 1, 0, 0, 0, 2, 3, 3, 3, 4, 4, 4}
+
+var UTF8_SM_MODEL_NEW = CodingStateMachineDict{
+	classTable:   UTF8_CLS_NEW,
+	classFactor:  12,
+	stateTable:   UTF8_ST_NEW,
+	charLenTable: UTF8_CHAR_LEN_TABLE_NEW,
+	name:         "UTF-8",
+}

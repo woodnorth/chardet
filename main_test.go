@@ -19,7 +19,7 @@ func TestX(t *testing.T) {
 }
 
 func TestY(t *testing.T) {
-	filepath.Walk("/Users/chenxiaoxi/PycharmProjects/pythonProject/chardet/tests/windows-1250-czech/", func(path string, info fs.FileInfo, err error) error {
+	filepath.Walk("/Users/chenxiaoxi/PycharmProjects/pythonProject/chardet/tests/utf-8/", func(path string, info fs.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
 		}
@@ -33,7 +33,9 @@ func TestY(t *testing.T) {
 }
 
 func TestZ(t *testing.T) {
-	rsp, err := http.Get("https://www.chinanews.com.cn/gn/2020/06-24/9221419.shtml")
+	req, err := http.NewRequest("GET", "https://zhuanlan.zhihu.com/p/641187337", nil)
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
+	rsp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return
 	}

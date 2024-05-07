@@ -46,8 +46,10 @@ func (s *SJISProber) feed(data []byte) ProbingState {
 				s.contextAnalyzer.feed(s.lastChar[2-charLen:], charLen)
 				s.distributionAnalyzer.feed(s.lastChar, charLen)
 			} else {
-				s.contextAnalyzer.feed(data[i+1-charLen:i+3-charLen], charLen)
-				s.distributionAnalyzer.feed(data[i-1:i+1], charLen)
+				if i+3-charLen <= len(data) {
+					s.contextAnalyzer.feed(data[i+1-charLen:i+3-charLen], charLen)
+					s.distributionAnalyzer.feed(data[i-1:i+1], charLen)
+				}
 			}
 		}
 	}
